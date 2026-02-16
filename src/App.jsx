@@ -2,22 +2,24 @@ import React from 'react';
 import { Instagram, Linkedin, Youtube, Mail, Music2 } from 'lucide-react'; 
 
 const Navbar = () => (
-  <nav className="flex justify-between items-center py-6 px-8 max-w-7xl mx-auto">
-    <div className="font-bold text-xl flex items-center gap-2">
-      <div className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-xs">Logo</div>
-      <span>IMTI FTUI 2026</span>
+  <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
+    <div className="flex justify-between items-center py-4 px-8 max-w-7xl w-full bg-white/50 backdrop-blur-md shadow-md rounded-full">
+      <div className="font-bold text-xl flex items-center gap-2">
+        <img src="/imti_ui.jpeg" alt="IMTI Logo" className="w-8 h-8 rounded-full" />
+        <span>IMTI FTUI 2026</span>
+      </div>
+      <ul className="hidden md:flex gap-8 text-sm font-medium text-gray-700">
+        <li className="hover:text-imti-blue cursor-pointer">Beranda</li>
+        <li className="hover:text-imti-blue cursor-pointer">About Us</li>
+        <li className="hover:text-imti-blue cursor-pointer">Pilih Menu</li>
+        <li className="hover:text-imti-blue cursor-pointer">Kontak Kami</li>
+      </ul>
     </div>
-    <ul className="hidden md:flex gap-8 text-sm font-medium text-gray-600">
-      <li className="text-black font-semibold cursor-pointer">Beranda</li>
-      <li className="hover:text-imti-blue cursor-pointer">Tentang Kami</li>
-      <li className="hover:text-imti-blue cursor-pointer">Pilih Menu</li>
-      <li className="hover:text-imti-blue cursor-pointer">Kontak Kami</li>
-    </ul>
   </nav>
 );
 
 const HeroSection = () => (
-  <section className="text-center pt-10 pb-16 px-4">
+  <section className="text-center pt-32 pb-16 px-4">
     <h1 className="text-4xl md:text-6xl font-bold text-imti-blue tracking-tight mb-2">
       IMTI FTUI 2026
     </h1>
@@ -110,7 +112,7 @@ function App() {
         <HeroSection />
         <NewsletterSection />
       </main>
-      <footer className="h-20 bg-gray-50 mt-12 flex items-center justify-center text-gray-400 text-sm">
+      <footer className="w-full h-20 bg-gray-50 mt-12 flex items-center justify-center text-gray-400 text-sm">
         © 2026 IMTI FTUI
       </footer>
     </div>
