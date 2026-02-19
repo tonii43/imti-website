@@ -48,8 +48,8 @@ const ImageSlot = ({ src, alt, hint, className = '', imageClassName = '' }) => (
 
 const AboutPage = () => {
   return (
-    <main className="pt-28 bg-slate-100 text-slate-900">
-      <section className="px-4 md:px-6 py-8 md:py-12">
+    <main className="bg-slate-100 text-slate-900 page-enter stagger-sections">
+      <section className="reveal-on-scroll delay-1 animated-soft-bg px-4 md:px-6 pt-32 md:pt-36 pb-8 md:pb-12">
         <div className="max-w-6xl mx-auto space-y-8 md:space-y-10">
           <ImageSlot
             src="/about/struktur-organisasi.png"
@@ -59,13 +59,13 @@ const AboutPage = () => {
             imageClassName="object-contain"
           />
 
-          <h2 className="text-center text-2xl md:text-5xl font-bold leading-tight">
+          <h2 className="text-soft-in text-center text-2xl md:text-5xl font-bold leading-tight">
             Tentang IMTI yang Sedang <span className="text-cyan-600">#MerekahMakna</span>
           </h2>
         </div>
       </section>
 
-      <section className="px-4 md:px-6 py-12 md:py-16 bg-slate-200">
+      <section className="reveal-on-scroll delay-2 px-4 md:px-6 py-12 md:py-16 bg-slate-200">
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-3xl md:text-4xl font-bold text-blue-900">VISI</h3>
           <p className="mt-4 text-sm md:text-base leading-relaxed text-slate-700">
@@ -84,10 +84,10 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <section className="px-4 md:px-6 py-12 md:py-16 bg-white">
+      <section className="reveal-on-scroll delay-3 px-4 md:px-6 py-12 md:py-16 bg-white">
         <div className="max-w-6xl mx-auto">
           <h3 className="text-center text-3xl md:text-4xl font-bold text-blue-950">FILOSOFI LOGO</h3>
-          <p className="mt-2 text-center text-xl md:text-3xl font-semibold text-blue-800">Eskalasi Mimpi</p>
+          <p className="mt-2 text-center text-xl md:text-3xl font-semibold text-blue-800">Merekah Makna</p>
 
           <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {logoPhilosophyCards.map((card) => (
@@ -106,7 +106,7 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <section className="px-4 md:px-6 py-12 md:py-16 bg-slate-200">
+      <section className="reveal-on-scroll delay-4 px-4 md:px-6 py-12 md:py-16 bg-slate-200">
         <div className="max-w-6xl mx-auto">
           <h3 className="text-center text-3xl md:text-4xl font-bold text-blue-950">BIDANG-BIDANG IMTI FTUI 2025</h3>
 
@@ -122,8 +122,8 @@ const AboutPage = () => {
           </div>
 
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {divisionCards.map((division) => (
-              <article key={division.short} className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+            {divisionCards.map((division, index) => (
+              <article key={division.short} className={`reveal-on-scroll ${index % 3 === 0 ? 'delay-2' : index % 3 === 1 ? 'delay-3' : 'delay-4'} bg-white rounded-2xl border border-slate-200 p-4 shadow-sm`}>
                 <ImageSlot
                   src={division.src}
                   alt={division.short}

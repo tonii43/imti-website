@@ -1,3 +1,155 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 96px;
+}
+
+@keyframes pageFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(18px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes sectionRise {
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes textSoftIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+		filter: blur(2px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+		filter: blur(0);
+	}
+}
+
+@keyframes bgFlow {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.page-enter {
+	animation: pageFadeIn 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.section-rise {
+	animation: sectionRise 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.text-soft-in {
+	animation: textSoftIn 950ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.reveal-on-scroll {
+	opacity: 0;
+	transform: translateY(40px);
+	filter: blur(3px);
+	transition: opacity 1050ms cubic-bezier(0.22, 1, 0.36, 1), transform 1050ms cubic-bezier(0.22, 1, 0.36, 1), filter 1050ms cubic-bezier(0.22, 1, 0.36, 1);
+	will-change: opacity, transform, filter;
+}
+
+.reveal-on-scroll.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+	filter: blur(0);
+}
+
+.delay-1 {
+	transition-delay: 0ms;
+}
+
+.delay-2 {
+	transition-delay: 140ms;
+}
+
+.delay-3 {
+	transition-delay: 280ms;
+}
+
+.delay-4 {
+	transition-delay: 420ms;
+}
+
+.delay-5 {
+	transition-delay: 560ms;
+}
+
+.delay-6 {
+	transition-delay: 700ms;
+}
+
+.animated-soft-bg {
+	background-image: linear-gradient(120deg, #e2e8f0, #dbeafe, #e0f2fe);
+	background-size: 220% 220%;
+	animation: bgFlow 20s ease infinite;
+}
+
+.stagger-sections > section:nth-child(1) {
+	animation-delay: 0ms;
+}
+
+.stagger-sections > section:nth-child(2) {
+	animation-delay: 150ms;
+}
+
+.stagger-sections > section:nth-child(3) {
+	animation-delay: 300ms;
+}
+
+.stagger-sections > section:nth-child(4) {
+	animation-delay: 450ms;
+}
+
+.stagger-sections > section:nth-child(5) {
+	animation-delay: 600ms;
+}
+
+.stagger-sections > section:nth-child(6) {
+	animation-delay: 750ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	.page-enter,
+	.section-rise,
+	.text-soft-in,
+	.animated-soft-bg,
+	.stagger-sections > section,
+	.reveal-on-scroll,
+	.reveal-on-scroll.is-visible {
+		animation: none !important;
+		transition: none !important;
+		transform: none !important;
+		opacity: 1 !important;
+		filter: none !important;
+	}
+}
