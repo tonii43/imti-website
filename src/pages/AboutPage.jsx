@@ -108,17 +108,27 @@ const AboutPage = () => {
 
       <section className="reveal-on-scroll delay-4 px-4 md:px-6 py-12 md:py-16 bg-slate-200">
         <div className="max-w-6xl mx-auto">
-          <h3 className="text-center text-3xl md:text-4xl font-bold text-blue-950">BIDANG-BIDANG IMTI FTUI 2025</h3>
+          <h3 className="text-center text-3xl md:text-4xl font-bold text-blue-950">BIDANG-BIDANG IMTI FTUI 2026</h3>
 
-          <div className="mt-10 max-w-sm mx-auto">
-            <ImageSlot
-              src="/about/ketua-lembaga.png"
-              alt="Ketua Lembaga"
-              hint="Upload: public/about/ketua-lembaga.png"
-              className="aspect-[4/5]"
-            />
-            <p className="mt-4 text-center text-xl font-bold text-slate-800">Ketua Lembaga</p>
-            <p className="text-center text-sm text-slate-600">Membawahi 12 bidang IMTI</p>
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-xl mx-auto">
+            <div>
+              <ImageSlot
+                src="/about/ketua-lembaga.png"
+                alt="Ketua Lembaga"
+                hint="Upload: public/about/ketua-lembaga.png"
+                className="aspect-[4/5]"
+              />
+              <p className="mt-4 text-center text-xl font-bold text-slate-800">Ketua Lembaga</p>
+            </div>
+            <div>
+              <ImageSlot
+                src="/about/wakil-ketua-lembaga.png"
+                alt="Wakil Ketua Lembaga"
+                hint="Upload: public/about/wakil-ketua-lembaga.png"
+                className="aspect-[4/5]"
+              />
+              <p className="mt-4 text-center text-xl font-bold text-slate-800">Wakil Ketua Lembaga</p>
+            </div>
           </div>
 
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">

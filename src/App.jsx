@@ -4,6 +4,14 @@ import { Instagram, Linkedin, Mail, Menu, Music2, X, Youtube } from 'lucide-reac
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -18,10 +26,10 @@ const Navbar = () => {
 
           <ul className="hidden md:flex gap-8 text-sm font-medium text-gray-700">
             <li>
-              <Link to="/" className="hover:text-imti-blue">Beranda</Link>
+              <Link to="/" className="hover:text-imti-blue" onClick={() => window.scrollTo(0, 0)}>Beranda</Link>
             </li>
             <li>
-              <Link to="/about" className="hover:text-imti-blue">About Us</Link>
+              <Link to="/about" className="hover:text-imti-blue" onClick={() => window.scrollTo(0, 0)}>About Us</Link>
             </li>
             <li>
               <a href="/#pilih-menu" className="hover:text-imti-blue">Pilih Menu</a>
@@ -45,10 +53,10 @@ const Navbar = () => {
         {isOpen && (
           <div className="md:hidden mt-3 bg-white/90 backdrop-blur-md shadow-md rounded-2xl border border-white/50 px-5 py-4">
             <div className="flex flex-col gap-3 text-sm font-medium text-gray-700">
-              <Link to="/" className="hover:text-imti-blue" onClick={() => setIsOpen(false)}>
+              <Link to="/" className="hover:text-imti-blue" onClick={() => { setIsOpen(false); window.scrollTo(0, 0); }}>
                 Beranda
               </Link>
-              <Link to="/about" className="hover:text-imti-blue" onClick={() => setIsOpen(false)}>
+              <Link to="/about" className="hover:text-imti-blue" onClick={() => { setIsOpen(false); window.scrollTo(0, 0); }}>
                 About Us
               </Link>
               <a href="/#pilih-menu" className="text-left hover:text-imti-blue" onClick={() => setIsOpen(false)}>
@@ -90,28 +98,49 @@ function App() {
   React.useEffect(() => {
     const targets = document.querySelectorAll('.reveal-on-scroll');
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.08,
-        rootMargin: '0px 0px -6% 0px',
-      },
-    );
+    // Instantly hide without transition (prevents slow fade-out flash)
+    targets.forEach((target) => {
+      target.style.transition = 'none';
+      target.classList.remove('is-visible');
+    });
 
-    targets.forEach((target) => observer.observe(target));
+    let observer;
 
-    return () => observer.disconnect();
-  }, [location.pathname]);
+    const timer = setTimeout(() => {
+      const freshTargets = document.querySelectorAll('.reveal-on-scroll');
+
+      // Re-enable transitions before observer fires
+      freshTargets.forEach((target) => {
+        target.style.transition = '';
+      });
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.08,
+          rootMargin: '0px 0px -6% 0px',
+        },
+      );
+
+      freshTargets.forEach((target) => observer.observe(target));
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      if (observer) observer.disconnect();
+    };
+  }, [location.key]);
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
