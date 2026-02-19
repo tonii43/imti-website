@@ -73,6 +73,17 @@ const Navbar = () => {
   );
 };
 
+// ========================================
+// PUT YOUR SOCIAL MEDIA LINKS HERE
+// ========================================
+const SOCIAL_LINKS = {
+  instagram: 'https://instagram.com/imtiftui', // ← ganti link Instagram
+  tiktok:    'https://tiktok.com/@imtiftui',      // ← ganti link TikTok
+  youtube:   'https://youtube.com/@YOUR_YOUTUBE',    // ← ganti link YouTube
+  linkedin:  'https://linkedin.com/company/imti-ui', // ← ganti link LinkedIn
+  email: 'https://mail.google.com/mail/?view=cm&to=humasimtiftui2026@gmail.com',          // ← ganti email
+};
+
 const Footer = () => (
   <footer className="w-full bg-gradient-to-r from-slate-950 via-blue-950 to-blue-800 text-white">
     <div className="max-w-7xl mx-auto px-6 md:px-10 py-12 md:py-14 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
@@ -82,11 +93,21 @@ const Footer = () => (
       </div>
 
       <div className="flex items-center gap-5 md:gap-7">
-        <Instagram className="w-8 h-8 md:w-10 md:h-10 cursor-pointer hover:opacity-80 transition" />
-        <Music2 className="w-8 h-8 md:w-10 md:h-10 cursor-pointer hover:opacity-80 transition" />
-        <Youtube className="w-8 h-8 md:w-10 md:h-10 cursor-pointer hover:opacity-80 transition" />
-        <Linkedin className="w-8 h-8 md:w-10 md:h-10 cursor-pointer hover:opacity-80 transition" />
-        <Mail className="w-8 h-8 md:w-10 md:h-10 cursor-pointer hover:opacity-80 transition" />
+        <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <Instagram className="w-8 h-8 md:w-10 md:h-10 hover:opacity-80 transition" />
+        </a>
+        <a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <Music2 className="w-8 h-8 md:w-10 md:h-10 hover:opacity-80 transition" />
+        </a>
+        <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <Youtube className="w-8 h-8 md:w-10 md:h-10 hover:opacity-80 transition" />
+        </a>
+        <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <Linkedin className="w-8 h-8 md:w-10 md:h-10 hover:opacity-80 transition" />
+        </a>
+        <a href={SOCIAL_LINKS.email} target="_blank" rel="noopener noreferrer" aria-label="Email">
+          <Mail className="w-8 h-8 md:w-10 md:h-10 hover:opacity-80 transition" />
+        </a>
       </div>
     </div>
   </footer>

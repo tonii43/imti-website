@@ -5,6 +5,44 @@
 html {
 	scroll-behavior: smooth;
 	scroll-padding-top: 96px;
+	overflow-y: overlay;
+
+	/* Firefox */
+	scrollbar-width: thin;
+	scrollbar-color: #0056b3 transparent;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+	width: 6px;
+	background: transparent;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+	border: none;
+	box-shadow: none;
+}
+
+::-webkit-scrollbar-track-piece {
+	background: transparent;
+}
+
+::-webkit-scrollbar-corner {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: linear-gradient(to bottom, #172554, #0056b3, #1d4ed8);
+	border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: linear-gradient(to bottom, #0056b3, #1d4ed8, #38bdf8);
+}
+
+::-webkit-scrollbar-button {
+	display: none;
 }
 
 @keyframes pageFadeIn {
