@@ -1,29 +1,67 @@
 import React from 'react';
-import { Instagram, Linkedin, Youtube, Mail, Music2 } from 'lucide-react'; 
+import { Link, Routes, Route } from 'react-router-dom';
+import { Instagram, Linkedin, Youtube, Mail, Music2, Menu, X } from 'lucide-react'; 
+import AboutPage from './pages/AboutPage';
 
-const Navbar = () => (
-  <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
-    <div className="flex justify-between items-center py-4 px-8 max-w-7xl w-full bg-white/50 backdrop-blur-md shadow-md rounded-full">
-      <div className="font-bold text-xl flex items-center gap-2">
-        <img src="/imti_ui.jpeg" alt="IMTI Logo" className="w-8 h-8 rounded-full" />
-        <span>IMTI FTUI 2026</span>
+const Navbar = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
+      <div className="w-full max-w-7xl">
+        <div className="flex justify-between items-center py-4 px-5 md:px-8 w-full bg-white/50 backdrop-blur-md shadow-md rounded-full">
+          <Link to="/" className="font-bold text-base md:text-xl flex items-center gap-2" onClick={() => setIsOpen(false)}>
+            <img src="/imti_ui.jpeg" alt="IMTI Logo" className="w-8 h-8 rounded-full" />
+            <span>IMTI FTUI 2026</span>
+          </Link>
+
+          <ul className="hidden md:flex gap-8 text-sm font-medium text-gray-700">
+            <li>
+              <Link to="/" className="hover:text-imti-blue">Beranda</Link>
+            </li>
+            <li>
+              <Link to="/about" className="hover:text-imti-blue">About Us</Link>
+            </li>
+            <li className="hover:text-imti-blue cursor-pointer">Pilih Menu</li>
+            <li className="hover:text-imti-blue cursor-pointer">Kontak Kami</li>
+          </ul>
+
+          <button
+            type="button"
+            className="md:hidden p-2 rounded-full text-slate-700 hover:bg-white/70 transition"
+            onClick={() => setIsOpen((prev) => !prev)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={isOpen}
+          >
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+
+        {isOpen && (
+          <div className="md:hidden mt-3 bg-white/90 backdrop-blur-md shadow-md rounded-2xl border border-white/50 px-5 py-4">
+            <div className="flex flex-col gap-3 text-sm font-medium text-gray-700">
+              <Link to="/" className="hover:text-imti-blue" onClick={() => setIsOpen(false)}>
+                Beranda
+              </Link>
+              <Link to="/about" className="hover:text-imti-blue" onClick={() => setIsOpen(false)}>
+                About Us
+              </Link>
+              <button type="button" className="text-left hover:text-imti-blue">Pilih Menu</button>
+              <button type="button" className="text-left hover:text-imti-blue">Kontak Kami</button>
+            </div>
+          </div>
+        )}
       </div>
-      <ul className="hidden md:flex gap-8 text-sm font-medium text-gray-700">
-        <li className="hover:text-imti-blue cursor-pointer">Beranda</li>
-        <li className="hover:text-imti-blue cursor-pointer">About Us</li>
-        <li className="hover:text-imti-blue cursor-pointer">Pilih Menu</li>
-        <li className="hover:text-imti-blue cursor-pointer">Kontak Kami</li>
-      </ul>
-    </div>
-  </nav>
-);
+    </nav>
+  );
+};
 
 const HeroSection = () => (
   <section className="text-center pt-32 pb-16 px-4">
-    <h1 className="text-4xl md:text-6xl font-bold text-imti-blue tracking-tight mb-2">
+    <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-2 inline-block mx-auto bg-gradient-to-r from-blue-950 via-imti-blue to-blue-700 bg-clip-text text-transparent">
       IMTI FTUI 2026
     </h1>
-    <h2 className="text-3xl md:text-5xl font-bold text-cyan-500 mb-8">
+    <h2 className="text-3xl md:text-5xl font-bold mb-8 inline-block mx-auto bg-gradient-to-r from-sky-500 via-cyan-500 to-blue-500 bg-clip-text text-transparent">
       #MerekahMakna
     </h2>
 
@@ -104,17 +142,41 @@ const NewsletterSection = () => (
   </section>
 );
 
+const Footer = () => (
+  <footer className="w-full bg-gradient-to-r from-slate-950 via-blue-950 to-blue-800 text-white">
+    <div className="max-w-7xl mx-auto px-6 md:px-10 py-12 md:py-14 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+      <div className="leading-tight">
+        <p className="text-xl md:text-3xl font-semibold">Ikatan Mahasiswa Teknik Industri</p>
+        <p className="text-xl md:text-5xl font-bold">Universitas Indonesia</p>
+      </div>
+
+      <div className="flex items-center gap-5 md:gap-7">
+        <Instagram className="w-8 h-8 md:w-10 md:h-10 cursor-pointer hover:opacity-80 transition" />
+        <Music2 className="w-8 h-8 md:w-10 md:h-10 cursor-pointer hover:opacity-80 transition" />
+        <Youtube className="w-8 h-8 md:w-10 md:h-10 cursor-pointer hover:opacity-80 transition" />
+        <Linkedin className="w-8 h-8 md:w-10 md:h-10 cursor-pointer hover:opacity-80 transition" />
+        <Mail className="w-8 h-8 md:w-10 md:h-10 cursor-pointer hover:opacity-80 transition" />
+      </div>
+    </div>
+  </footer>
+);
+
+const HomePage = () => (
+  <main>
+    <HeroSection />
+    <NewsletterSection />
+  </main>
+);
+
 function App() {
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
       <Navbar />
-      <main>
-        <HeroSection />
-        <NewsletterSection />
-      </main>
-      <footer className="w-full h-20 bg-gray-50 mt-12 flex items-center justify-center text-gray-400 text-sm">
-        © 2026 IMTI FTUI
-      </footer>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }

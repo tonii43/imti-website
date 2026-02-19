@@ -9,6 +9,9 @@ export default {
       colors: {
         'imti-blue': '#0056b3',
         'imti-dark': '#1a1a1a',
+      },
+      fontFamily: {
+        'sans': ['Inter', 'sans-serif'],
       }
     },
   },
