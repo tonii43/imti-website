@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const visionMissionItems = [
   'Mewujudkan IMTI yang unggul melalui internal lembaga yang harmonis dan pengembangan berkelanjutan bagi seluruh fungsionaris.',
   'Menjadikan IMTI FTUI sebagai katalisator inovasi dan wadah untuk berkarya bagi para fungsionaris dalam mewadahi minat bakat.',
@@ -46,9 +47,10 @@ const ImageSlot = ({ src, alt, hint, className = '', imageClassName = '' }) => (
   </div>
 );
 
-const AboutPage = () => {
+const AboutPage = ({ inConstruction = false }) => {
   return (
-    <main className="bg-slate-100 text-slate-900 page-enter stagger-sections">
+    <div className={inConstruction ? 'in-construction' : ''}>
+      <main className="content bg-slate-100 text-slate-900 page-enter stagger-sections">
       <section className="reveal-on-scroll delay-1 animated-soft-bg px-4 md:px-6 pt-32 md:pt-36 pb-8 md:pb-12">
         <div className="max-w-6xl mx-auto space-y-8 md:space-y-10">
           <ImageSlot
@@ -147,7 +149,9 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
-    </main>
+
+      </main>
+    </div>
   );
 };
 

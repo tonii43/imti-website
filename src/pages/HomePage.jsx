@@ -1,6 +1,7 @@
 import React from 'react';
 import { Instagram, Linkedin, Mail, Music2, Youtube } from 'lucide-react';
 
+
 const menuItems = [
   {
     title: 'Publikasi, Partnership, & MC',
@@ -47,9 +48,10 @@ const ImageBox = ({ src, alt, hint, className = '', imageClassName = '' }) => (
   </div>
 );
 
-const HomePage = () => {
+const HomePage = ({ inConstruction = false }) => {
   return (
-    <main className="text-slate-900 page-enter stagger-sections">
+    <div className={inConstruction ? 'in-construction' : ''}>
+      <main className="content text-slate-900 page-enter stagger-sections">
       <section className="reveal-on-scroll delay-1 animated-soft-bg px-4 md:px-6 pt-32 md:pt-36 pb-16 md:pb-20">
         <div className="max-w-5xl mx-auto text-center flex flex-col items-center">
           <h1 className="text-soft-in text-4xl md:text-6xl font-bold tracking-tight inline-block bg-gradient-to-r from-blue-950 via-imti-blue to-blue-700 bg-clip-text text-transparent">
@@ -236,7 +238,9 @@ const HomePage = () => {
           />
         </div>
       </section>
-    </main>
+
+      </main>
+    </div>
   );
 };
 

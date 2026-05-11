@@ -4,6 +4,9 @@ import { Instagram, Linkedin, Mail, Menu, Music2, X, Youtube } from 'lucide-reac
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 
+// Global toggle for the in-construction overlay
+const IN_CONSTRUCTION = true;
+
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   React.useEffect(() => {
@@ -18,7 +21,11 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
       <div className="w-full max-w-7xl">
-        <div className="flex justify-between items-center py-4 px-5 md:px-8 w-full bg-white/50 backdrop-blur-md shadow-md rounded-full">
+        <div className="relative flex justify-between items-center py-4 px-5 md:px-8 w-full bg-white/50 backdrop-blur-md shadow-md rounded-full">
+          <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-2 text-slate-700">
+            <img src="/icons/cone.svg" alt="Construction" className="w-4 h-4" />
+            <span className="text-xs font-semibold">In construction · Expected July 2026</span>
+          </div>
           <Link to="/" className="font-bold text-base md:text-xl flex items-center gap-2" onClick={() => setIsOpen(false)}>
             <img src="/imti_ui.jpeg" alt="IMTI Logo" className="w-8 h-8 rounded-full" />
             <span>IMTI FTUI 2026</span>
@@ -50,24 +57,28 @@ const Navbar = () => {
           </button>
         </div>
 
-        {isOpen && (
-          <div className="md:hidden mt-3 bg-white/90 backdrop-blur-md shadow-md rounded-2xl border border-white/50 px-5 py-4">
-            <div className="flex flex-col gap-3 text-sm font-medium text-gray-700">
-              <Link to="/" className="hover:text-imti-blue" onClick={() => { setIsOpen(false); window.scrollTo(0, 0); }}>
-                Beranda
-              </Link>
-              <Link to="/about" className="hover:text-imti-blue" onClick={() => { setIsOpen(false); window.scrollTo(0, 0); }}>
-                About Us
-              </Link>
-              <a href="/#pilih-menu" className="text-left hover:text-imti-blue" onClick={() => setIsOpen(false)}>
-                Pilih Menu
-              </a>
-              <a href="/#kontak-kami" className="text-left hover:text-imti-blue" onClick={() => setIsOpen(false)}>
-                Kontak Kami
-              </a>
-            </div>
+        <div
+          className={`md:hidden mt-3 overflow-hidden rounded-2xl border border-white/50 bg-white/90 px-5 backdrop-blur-md shadow-md transition-all duration-300 ease-out ${
+            isOpen
+              ? 'max-h-60 opacity-100 translate-y-0 pointer-events-auto py-4'
+              : 'max-h-0 opacity-0 -translate-y-3 pointer-events-none py-0'
+          }`}
+        >
+          <div className={`flex flex-col gap-3 text-sm font-medium text-gray-700 transition-all duration-300 ease-out ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'}`}>
+            <Link to="/" className="hover:text-imti-blue" onClick={() => { setIsOpen(false); window.scrollTo(0, 0); }}>
+              Beranda
+            </Link>
+            <Link to="/about" className="hover:text-imti-blue" onClick={() => { setIsOpen(false); window.scrollTo(0, 0); }}>
+              About Us
+            </Link>
+            <a href="/#pilih-menu" className="text-left hover:text-imti-blue" onClick={() => setIsOpen(false)}>
+              Pilih Menu
+            </a>
+            <a href="/#kontak-kami" className="text-left hover:text-imti-blue" onClick={() => setIsOpen(false)}>
+              Kontak Kami
+            </a>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );
@@ -85,7 +96,7 @@ const SOCIAL_LINKS = {
 };
 
 const Footer = () => (
-  <footer className="w-full bg-gradient-to-r from-slate-950 via-blue-950 to-blue-800 text-white">
+  <footer className="w-full bg-gradient-to-r from-slate-950 via-blue-950 to-blue-800 text-white relative z-50">
     <div className="max-w-7xl mx-auto px-6 md:px-10 py-12 md:py-14 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
       <div className="leading-tight">
         <p className="text-xl md:text-3xl font-semibold">Ikatan Mahasiswa Teknik Industri</p>
@@ -164,8 +175,8 @@ function App() {
       <ScrollToTop />
       <Navbar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
+        <Route path="/" element={<HomePage inConstruction={IN_CONSTRUCTION} />} />
+        <Route path="/about" element={<AboutPage inConstruction={IN_CONSTRUCTION} />} />
       </Routes>
       <Footer />
     </div>

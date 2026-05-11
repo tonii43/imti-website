@@ -196,3 +196,30 @@ section.reveal-on-scroll.is-visible {
 		filter: none !important;
 	}
 }
+
+/* In-construction overlay styles */
+.in-construction .content > * {
+	transition: filter 300ms ease, opacity 300ms ease, transform 300ms ease;
+}
+
+
+/* Default: blur everything inside .content */
+.in-construction .content > * {
+	filter: blur(6px) saturate(0.9);
+	opacity: 0.85;
+	pointer-events: none;
+}
+
+/* Keep contact section interactive/unblurred when present */
+.in-construction .content > #kontak-kami {
+	filter: none;
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* Construction overlay bubble centered on the viewport (above content but below footer)
+   Overlay sits at z-index 40; footer should be above it (z-50). */
+
+@media (prefers-reduced-motion: reduce) {
+	.in-construction .content > * { transition: none; }
+}
